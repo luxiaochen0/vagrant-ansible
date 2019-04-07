@@ -1,0 +1,9 @@
+- hosts: agent
+  gather_facts: no
+  tasks:
+    - name: deliver authorized_keys
+      authorized_key:
+        user: vagrant
+        key: "{{ lookup('file', '/home/vagrant/.ssh/id_rsa2.pub') }}"  # 从本地authorized_keys文件读取公钥内容
+        state: present
+        exclusive: no
